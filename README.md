@@ -3,6 +3,21 @@
 StarLogs is an astronomy observation platform that lets users determine the best vissibility window for stargazing, I built it as a full-stack application and delivered for my DevOps portfolio.  
 The focus is not only on application features, but on how software is packaged, validated, deployed, and operated in a cloud-native environment.
 
+## Application Screenshots
+
+<p align="center">
+  <img src="public/screenshots/login.png" width="24%" alt="Login" />
+  <img src="public/screenshots/onboarding.png" width="24%" alt="Onboarding" />
+  <img src="public/screenshots/dashboard.png" width="24%" alt="Dashboard" />
+  <img src="public/screenshots/skymap.png" width="24%" alt="Sky Map" />
+</p>
+<p align="center">
+  <img src="public/screenshots/events.png" width="24%" alt="Events" />
+  <img src="public/screenshots/forecast.png" width="24%" alt="Forecast" />
+  <img src="public/screenshots/astronomy%20news.png" width="24%" alt="Astronomy News" />
+  <img src="public/screenshots/astrogallery.png" width="24%" alt="Astro Gallery" />
+</p>
+
 ## DevOps Workflow
 
 Through this project I demonstrate a practical DevOps knowledge by demonstrating the delivery path from local development to AWS production infrastructure:
@@ -14,6 +29,18 @@ Through this project I demonstrate a practical DevOps knowledge by demonstrating
 - Frontend is shipped as a static bundle to S3 and invalidated through CloudFront.
 
 The repository is structured to show how my product code and operations code evolve together.
+
+## DevOps Features Implemented
+
+- Infrastructure as Code with Terraform for VPC, EKS, RDS, ElastiCache, ECR, and S3.
+- Containerized frontend and backend services with Docker.
+- Local multi-service environment using Docker Compose (frontend, backend, PostgreSQL, Redis).
+- Kubernetes backend deployment with health probes and rolling update strategy.
+- Horizontal Pod Autoscaler (HPA) for dynamic backend scaling.
+- Ingress-based API exposure for EKS workloads.
+- CI/CD pipeline using GitHub Actions for lint, build, image publish, and deployment.
+- Frontend static deployment to S3 with CloudFront cache invalidation.
+- API health endpoint for runtime health verification and orchestration readiness.
 
 ## Architecture Workflow Diagram
 
