@@ -1,0 +1,115 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: starlogs-backend
+  namespace: starlogs
+  labels:
+    app: starlogs-backend
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: starlogs-backend
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  template:
+    metadata:
+      labels:
+        app: starlogs-backend
+    spec:
+      serviceAccountName: starlogs-backend
+      containers:
+        - name: backend
+          image: ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/starlogs-backend:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3001
+              name: http
+          env:
+            - name: NODE_ENV
+              value: "production"
+            - name: PORT
+              value: "3001"
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: starlogs-secrets
+                  key: database-url
+            - name: REDIS_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: starlogs-config
+                  key: redis-host
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: starlogs-secrets
+                  key: jwt-secret
+            - name: FRONTEND_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: starlogs-config
+                  key: frontend-url
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "100m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 3001
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 3001
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            timeoutSeconds: 3
+            failureThreshold: 3
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: app
+                      operator: In
+                      values:
+                        - starlogs-backend
+                topologyKey: kubernetes.io/hostname
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: starlogs-backend
+  namespace: starlogs
+  labels:
+    app: starlogs-backend
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: 3001
+      protocol: TCP
+      name: http
+  selector:
+    app: starlogs-backend
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: starlogs-backend
+  namespace: starlogs
+  annotations:
+    eks.amazonaws.com/role-arn: arn:aws:iam::${AWS_ACCOUNT_ID}:role/starlogs-backend-role

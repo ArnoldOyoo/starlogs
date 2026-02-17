@@ -1,0 +1,322 @@
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
+@tailwind base;
+
+/* Status indicator styles */
+.status-indicator {
+  @apply w-2 h-2 rounded-full;
+}
+.status-indicator.online {
+  @apply bg-success;
+  box-shadow: 0 0 6px hsl(var(--success));
+}
+.status-indicator.away {
+  @apply bg-warning;
+  box-shadow: 0 0 6px hsl(var(--warning));
+}
+.status-indicator.offline {
+  @apply bg-destructive;
+  box-shadow: 0 0 6px hsl(var(--destructive));
+}
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Deep space dark theme */
+    --background: 222 47% 6%;
+    --foreground: 210 40% 98%;
+
+    --card: 222 47% 9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222 47% 9%;
+    --popover-foreground: 210 40% 98%;
+
+    /* Electric blue primary */
+    --primary: 217 91% 60%;
+    --primary-foreground: 222 47% 6%;
+
+    --secondary: 217 33% 17%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217 33% 14%;
+    --muted-foreground: 215 20% 55%;
+
+    --accent: 217 33% 17%;
+    --accent-foreground: 210 40% 98%;
+
+    /* Status colors */
+    --success: 142 71% 45%;
+    --success-foreground: 0 0% 100%;
+    
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 0%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217 33% 20%;
+    --input: 217 33% 17%;
+    --ring: 217 91% 60%;
+
+    --radius: 0.75rem;
+
+    /* Sidebar */
+    --sidebar-background: 222 47% 7%;
+    --sidebar-foreground: 215 20% 65%;
+    --sidebar-primary: 217 91% 60%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 217 33% 14%;
+    --sidebar-accent-foreground: 210 40% 98%;
+    --sidebar-border: 217 33% 15%;
+    --sidebar-ring: 217 91% 60%;
+
+    /* Custom StarLogs tokens */
+    --glow-primary: 217 91% 60%;
+    --glow-success: 142 71% 45%;
+    --glow-cyan: 186 100% 50%;
+    --surface-elevated: 222 47% 11%;
+    --chart-line: 217 91% 60%;
+  }
+
+  .light {
+    --background: 210 40% 98%;
+    --foreground: 222 47% 11%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+    --primary: 217 91% 50%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 217 20% 92%;
+    --secondary-foreground: 222 47% 11%;
+    --muted: 217 20% 94%;
+    --muted-foreground: 215 20% 45%;
+    --accent: 217 20% 92%;
+    --accent-foreground: 222 47% 11%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 217 20% 85%;
+    --input: 217 20% 90%;
+    --ring: 217 91% 50%;
+    
+    --success: 142 71% 40%;
+    --success-foreground: 0 0% 100%;
+    --warning: 38 92% 45%;
+    --warning-foreground: 0 0% 0%;
+    
+    --sidebar-background: 217 20% 96%;
+    --sidebar-foreground: 215 20% 35%;
+    --sidebar-primary: 217 91% 50%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 217 20% 90%;
+    --sidebar-accent-foreground: 222 47% 11%;
+    --sidebar-border: 217 20% 88%;
+    --sidebar-ring: 217 91% 50%;
+    
+    --glow-primary: 217 91% 50%;
+    --glow-success: 142 71% 40%;
+    --glow-cyan: 186 100% 40%;
+    --surface-elevated: 0 0% 100%;
+    --chart-line: 217 91% 50%;
+  }
+
+  .dark {
+    --background: 222 47% 6%;
+    --foreground: 210 40% 98%;
+    --card: 222 47% 9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222 47% 9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 217 91% 60%;
+    --primary-foreground: 222 47% 6%;
+    --secondary: 217 33% 17%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217 33% 14%;
+    --muted-foreground: 215 20% 55%;
+    --accent: 217 33% 17%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62% 30%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217 33% 20%;
+    --input: 217 33% 17%;
+    --ring: 217 91% 60%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'Share Tech Mono', monospace;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Share Tech Mono', monospace;
+  }
+}
+
+@layer components {
+  .card-glow {
+    @apply relative overflow-hidden;
+    box-shadow: 0 0 20px -5px hsl(var(--glow-primary) / 0.15);
+  }
+
+  .card-glow::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(135deg, hsl(var(--primary) / 0.3), transparent 50%);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  .status-indicator {
+    @apply w-2 h-2 rounded-full animate-pulse;
+  }
+
+  .status-indicator.online {
+    @apply bg-green-500;
+    box-shadow: 0 0 8px hsl(var(--glow-success));
+  }
+
+  .visibility-ring {
+    background: conic-gradient(
+      hsl(var(--primary)) var(--progress, 0%),
+      hsl(var(--muted)) var(--progress, 0%)
+    );
+  }
+
+  .glass-card {
+    @apply bg-card/80 backdrop-blur-xl border border-border/50;
+  }
+
+  .nav-item-active {
+    @apply bg-primary text-primary-foreground;
+  }
+
+  .text-gradient {
+    @apply bg-gradient-to-r from-primary to-cyan-400 bg-clip-text text-transparent;
+  }
+}
+
+/* Wavy gradient animation for auth page */
+@keyframes wave-gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.auth-wave-bg {
+  background: linear-gradient(
+    -45deg,
+    hsl(var(--background)),
+    hsl(var(--primary) / 0.15),
+    hsl(217 91% 45% / 0.2),
+    hsl(186 100% 50% / 0.1),
+    hsl(var(--primary) / 0.15),
+    hsl(var(--background))
+  );
+  background-size: 400% 400%;
+  animation: wave-gradient 15s ease infinite;
+}
+
+.auth-wave-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at 50% 0%,
+    hsl(var(--primary) / 0.1) 0%,
+    transparent 50%
+  );
+  pointer-events: none;
+}
+
+/* Floating star particles animation */
+@keyframes float-star {
+  0%, 100% {
+    transform: translateY(0) translateX(0);
+    opacity: 0.2;
+  }
+  25% {
+    transform: translateY(-20px) translateX(5px);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translateY(-10px) translateX(-5px);
+    opacity: 0.4;
+  }
+  75% {
+    transform: translateY(-30px) translateX(3px);
+    opacity: 0.7;
+  }
+}
+
+.animate-float-star {
+  animation: float-star linear infinite;
+}
+
+/* Twinkling star effect */
+@keyframes twinkle {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(1);
+    filter: brightness(1);
+  }
+  25% {
+    opacity: 1;
+    transform: scale(1.2);
+    filter: brightness(1.5);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(0.9);
+    filter: brightness(0.8);
+  }
+  75% {
+    opacity: 0.9;
+    transform: scale(1.1);
+    filter: brightness(1.3);
+  }
+}
+
+.animate-twinkle {
+  animation: float-star linear infinite, twinkle ease-in-out infinite;
+}
+
+@layer utilities {
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--muted)) transparent;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background: hsl(var(--muted));
+    border-radius: 3px;
+  }
+}

@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: starlogs-config
+  namespace: starlogs
+data:
+  redis-host: "starlogs-dev-redis.xxxxx.cache.amazonaws.com"
+  frontend-url: "https://starlogs.example.com"
+  node-env: "production"
