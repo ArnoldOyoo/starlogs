@@ -1,11 +1,11 @@
 # StarLogs
 
-StarLogs is an astronomy observation platform built as a full-stack application and delivered as a DevOps portfolio project.  
+StarLogs is an astronomy observation platform that lets users determine the best vissibility window for stargazing, I built it as a full-stack application and delivered for my DevOps portfolio.  
 The focus is not only on application features, but on how software is packaged, validated, deployed, and operated in a cloud-native environment.
 
-## DevOps Narrative
+## DevOps Workflow
 
-This project demonstrates a practical DevOps delivery path from local development to AWS production infrastructure:
+Through this project I demonstrate a practical DevOps knowledge by demonstrating the delivery path from local development to AWS production infrastructure:
 
 - Application services are containerized for consistent runtime behavior.
 - Infrastructure is declared with Terraform for repeatable provisioning.
@@ -13,13 +13,13 @@ This project demonstrates a practical DevOps delivery path from local developmen
 - GitHub Actions orchestrates CI/CD for test, build, image publish, and deployment.
 - Frontend is shipped as a static bundle to S3 and invalidated through CloudFront.
 
-The repository is structured to show how product code and operations code evolve together.
+The repository is structured to show how my product code and operations code evolve together.
 
 ## Architecture Workflow Diagram
 
 ```mermaid
 flowchart LR
-    Dev[Developer] --> GitHub[GitHub Repository]
+    Dev[Oyoo] --> GitHub[GitHub Repository]
     GitHub --> Actions[GitHub Actions CI/CD]
 
     Actions --> FE_Build[Build Frontend]
@@ -123,5 +123,3 @@ This portfolio emphasizes:
 - Automated delivery
 - Service scalability (HPA)
 - Operational readiness through health checks and rolling deployment patterns
-
-Planned hardening areas include deeper observability, policy/security automation, and multi-environment promotion workflows.
