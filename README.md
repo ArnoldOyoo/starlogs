@@ -81,6 +81,29 @@ flowchart LR
 5. Frontend static assets are deployed to S3.
 6. CloudFront cache is invalidated to publish the latest UI.
 
+## GitLab CI/CD Workflow
+
+This repository now includes a GitLab pipeline in `.gitlab-ci.yml` with:
+- Terraform formatting and validation checks.
+- Frontend and backend quality gates (lint/build).
+- Backend test job (configurable as strict once tests are added).
+- Backend Docker build and publish to Amazon ECR.
+- Frontend artifact build and deployment to S3.
+- Backend deployment to EKS with Kubernetes manifest rendering via `envsubst`.
+- Staging deploys from the default branch and manual production deploys from tags.
+- Security scanning templates (SAST and secret detection).
+
+Required GitLab CI/CD variables:
+- `AWS_ACCESS_KEY_ID`
+- `AWS_SECRET_ACCESS_KEY`
+- `AWS_ACCOUNT_ID`
+- `AWS_REGION` (optional if default used)
+- `EKS_CLUSTER_NAME`
+- `ECR_REPOSITORY`
+- `FRONTEND_S3_BUCKET`
+- `CLOUDFRONT_DISTRIBUTION_ID` (optional)
+- `K8S_NAMESPACE` (optional if default used)
+
 ## Tech Stack
 
 ### Application
