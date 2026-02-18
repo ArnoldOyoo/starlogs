@@ -82,8 +82,6 @@ flowchart LR
 6. CloudFront cache is invalidated to publish the latest UI.
 
 ## GitLab CI/CD Workflow
-
-This repository now includes a GitLab pipeline in `.gitlab-ci.yml` with:
 - Terraform formatting and validation checks.
 - Frontend and backend quality gates (lint/build).
 - Backend test job (configurable as strict once tests are added).
@@ -97,12 +95,12 @@ Required GitLab CI/CD variables:
 - `AWS_ACCESS_KEY_ID`
 - `AWS_SECRET_ACCESS_KEY`
 - `AWS_ACCOUNT_ID`
-- `AWS_REGION` (optional if default used)
+- `AWS_REGION`
 - `EKS_CLUSTER_NAME`
 - `ECR_REPOSITORY`
 - `FRONTEND_S3_BUCKET`
-- `CLOUDFRONT_DISTRIBUTION_ID` (optional)
-- `K8S_NAMESPACE` (optional if default used)
+- `CLOUDFRONT_DISTRIBUTION_ID`
+- `K8S_NAMESPACE`
 
 ## Tech Stack
 
