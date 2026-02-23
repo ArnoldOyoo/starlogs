@@ -102,14 +102,14 @@ Required GitLab CI/CD variables:
 - `CLOUDFRONT_DISTRIBUTION_ID`
 - `K8S_NAMESPACE`
 
-## Tech Stack
+## Used Tech Stack
 
 ### Application
 - Frontend: React, TypeScript, Vite, Tailwind CSS
 - Backend: Express, TypeScript, Prisma
 - Data: PostgreSQL, Redis
 
-### DevOps
+### My DevOps Stack
 - Containers: Docker, Docker Compose
 - Orchestration: Kubernetes (EKS)
 - Infrastructure as Code: Terraform
@@ -163,11 +163,3 @@ docker-compose up -d
 - Terraform setup and provisioning details: `infrastructure/README.md`
 - Kubernetes deployment manifests: `infrastructure/kubernetes/`
 - Backend service details: `backend/README.md`
-
-## Portfolio Scope
-
-This portfolio emphasizes:
-- Reproducible infrastructure
-- Automated delivery
-- Service scalability (HPA)
-- Operational readiness through health checks and rolling deployment patterns
